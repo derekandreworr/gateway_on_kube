@@ -1,0 +1,91 @@
+            <l7:Service xmlns:l7="http://ns.l7tech.com/2010/04/gateway-management">
+                <l7:ServiceDetail>
+                    <l7:Name>lac-policy</l7:Name>
+                    <l7:Enabled>true</l7:Enabled>
+                    <l7:ServiceMappings>
+                        <l7:HttpMapping>
+                            <l7:UrlPattern>/lac-policy</l7:UrlPattern>
+                            <l7:Verbs>
+<l7:Verb>GET</l7:Verb>
+<l7:Verb>POST</l7:Verb>
+<l7:Verb>PUT</l7:Verb>
+<l7:Verb>DELETE</l7:Verb>
+                            </l7:Verbs>
+                        </l7:HttpMapping>
+                    </l7:ServiceMappings>
+                    <l7:Properties>
+                        <l7:Property key="internal">
+                            <l7:BooleanValue>false</l7:BooleanValue>
+                        </l7:Property>
+                        <l7:Property key="policyRevision">
+                            <l7:LongValue>4</l7:LongValue>
+                        </l7:Property>
+                        <l7:Property key="soap">
+                            <l7:BooleanValue>false</l7:BooleanValue>
+                        </l7:Property>
+                        <l7:Property key="tracingEnabled">
+                            <l7:BooleanValue>false</l7:BooleanValue>
+                        </l7:Property>
+                        <l7:Property key="wssProcessingEnabled">
+                            <l7:BooleanValue>false</l7:BooleanValue>
+                        </l7:Property>
+                    </l7:Properties>
+                </l7:ServiceDetail>
+                <l7:Resources>
+                    <l7:ResourceSet tag="policy">
+                        <l7:Resource type="policy" version="3">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;wsp:Policy xmlns:L7p=&quot;http://www.layer7tech.com/ws/policy&quot; xmlns:wsp=&quot;http://schemas.xmlsoap.org/ws/2002/12/policy&quot;&gt;
+    &lt;wsp:All wsp:Usage=&quot;Required&quot;&gt;
+        &lt;L7p:SslAssertion/&gt;
+        &lt;L7p:HttpBasic/&gt;
+        &lt;L7p:Authentication&gt;
+            &lt;L7p:IdentityProviderOid goidValue=&quot;0000000000000000fffffffffffffffe&quot;/&gt;
+        &lt;/L7p:Authentication&gt;
+        &lt;L7p:CommentAssertion&gt;
+            &lt;L7p:Comment stringValue=&quot;TODO:  Replace &amp;quot;demo_full&amp;quot; with your auth token in the header.  It must end with &amp;quot;:1&amp;quot;, don't remove that part.&quot;/&gt;
+        &lt;/L7p:CommentAssertion&gt;
+        &lt;L7p:AddHeader&gt;
+            &lt;L7p:HeaderName stringValue=&quot;Authorization&quot;/&gt;
+            &lt;L7p:HeaderValue stringValue=&quot;CALiveAPICreator demo_full:1&quot;/&gt;
+            &lt;L7p:RemoveExisting booleanValue=&quot;true&quot;/&gt;
+        &lt;/L7p:AddHeader&gt;
+        &lt;L7p:CommentAssertion&gt;
+            &lt;L7p:Comment stringValue=&quot;TODO:  Replace IP/Port and fix URL for your LAC API.  You MUST use your internal IP not external IP.&quot;/&gt;
+        &lt;/L7p:CommentAssertion&gt;
+        &lt;L7p:HttpRoutingAssertion&gt;
+            &lt;L7p:CurrentSecurityHeaderHandling intValue=&quot;3&quot;/&gt;
+            &lt;L7p:FailOnErrorStatus booleanValue=&quot;false&quot;/&gt;
+            &lt;L7p:ProtectedServiceUrl stringValue=&quot;http://192.168.99.100:32080/rest/default/demo/v1/demo:product&quot;/&gt;
+            &lt;L7p:ProxyPassword stringValueNull=&quot;null&quot;/&gt;
+            &lt;L7p:ProxyUsername stringValueNull=&quot;null&quot;/&gt;
+            &lt;L7p:RequestHeaderRules httpPassthroughRuleSet=&quot;included&quot;&gt;
+                &lt;L7p:ForwardAll booleanValue=&quot;true&quot;/&gt;
+                &lt;L7p:Rules httpPassthroughRules=&quot;included&quot;&gt;
+                    &lt;L7p:item httpPassthroughRule=&quot;included&quot;&gt;
+                        &lt;L7p:Name stringValue=&quot;Cookie&quot;/&gt;
+                    &lt;/L7p:item&gt;
+                    &lt;L7p:item httpPassthroughRule=&quot;included&quot;&gt;
+                        &lt;L7p:Name stringValue=&quot;SOAPAction&quot;/&gt;
+                    &lt;/L7p:item&gt;
+                &lt;/L7p:Rules&gt;
+            &lt;/L7p:RequestHeaderRules&gt;
+            &lt;L7p:RequestParamRules httpPassthroughRuleSet=&quot;included&quot;&gt;
+                &lt;L7p:ForwardAll booleanValue=&quot;true&quot;/&gt;
+                &lt;L7p:Rules httpPassthroughRules=&quot;included&quot;/&gt;
+            &lt;/L7p:RequestParamRules&gt;
+            &lt;L7p:ResponseHeaderRules httpPassthroughRuleSet=&quot;included&quot;&gt;
+                &lt;L7p:ForwardAll booleanValue=&quot;true&quot;/&gt;
+                &lt;L7p:Rules httpPassthroughRules=&quot;included&quot;&gt;
+                    &lt;L7p:item httpPassthroughRule=&quot;included&quot;&gt;
+                        &lt;L7p:Name stringValue=&quot;Set-Cookie&quot;/&gt;
+                    &lt;/L7p:item&gt;
+                &lt;/L7p:Rules&gt;
+            &lt;/L7p:ResponseHeaderRules&gt;
+        &lt;/L7p:HttpRoutingAssertion&gt;
+    &lt;/wsp:All&gt;
+&lt;/wsp:Policy&gt;
+</l7:Resource>
+                    </l7:ResourceSet>
+                </l7:Resources>
+            </l7:Service>
+
