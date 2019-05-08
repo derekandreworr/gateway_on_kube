@@ -12,7 +12,15 @@ stages {
            sh 'kubectl apply -f container-gateway-config.yml -f container-gateway-mysql.yml -f container-gateway.yml --validate=false'
         }
     }
-    steps {
+    stage('Deploy lac to minikube'){
+           steps {
+            echo 'Starting lac'
+            sh 'kubectl apply -f lac-nps.yml --validate=false'
+          }
+    }
+
+    stage('expose gw via kubectl expose'){
+          steps {
            echo 'exposing gateway'
            sh 'kubectl expose deployment gw-dc --type=NodePort'
           }
@@ -38,4 +46,10 @@ stages {
           sleep 5
          }
     }
+    stage('call the api'){
+         steps {
+          sh 'curl -k -u admin:CAdemo123! https://192.168.99.100:31843/lac-policy'
+         }  
+    }
+}
 }
