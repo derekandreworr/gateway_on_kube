@@ -9,7 +9,7 @@ stages {
     stage('Deploy gateway and mysql to MiniKube') {
         steps {
            echo 'starting gateway and mysql'
-           sh 'sudo kubectl apply -f container-gateway-config.yml -f container-gateway-mysql.yml -f container-gateway.yml --validate=false'
+           sh 'kubectl apply -f container-gateway-config.yml -f container-gateway-mysql.yml -f container-gateway.yml --validate=false'
         }
     }
 //    stage('Deploy lac to minikube'){
@@ -22,17 +22,17 @@ stages {
     stage('expose gw via kubectl expose'){
           steps {
            echo 'exposing gateway'
-           sh 'sudo kubectl expose deployment gw-dc --type=NodePort'
+           sh 'kubectl expose deployment gw-dc --type=NodePort'
           }
     }
     stage('get service'){
           steps {
-           sh 'sudo kubectl get service'
+           sh 'kubectl get service'
           }
     }
     stage('get pods'){
           steps {
-           sh 'sudo kubectl get pods'
+           sh 'kubectl get pods'
           }
     }
     stage('sleep for a few mins'){
