@@ -1,21 +1,21 @@
 echo INFO: Deploying Gateway and MySQL
-kubectl apply -f container-gateway-config.yml -f container-gateway-mysql.yml -f container-gateway.yml --validate=false
+sudo kubectl apply -f container-gateway-config.yml -f container-gateway-mysql.yml -f container-gateway.yml --validate=false
 sleep 5
 
 echo INFO: Deploying Live API Creator
-kubectl apply -f lac-nps.yml --validate=false
+sudo kubectl apply -f lac-nps.yml --validate=false
 sleep 5
 
 echo INFO: Exposing Gateway ports
-kubectl expose deployment gw-dc --type=NodePort
+sudo kubectl expose deployment gw-dc --type=NodePort
 
 echo   
 echo kubectl get service
-kubectl get service
+sudo kubectl get service
 
 echo  
 echo kubectl get pods
-kubectl get pods
+sudo kubectl get pods
 
 #echo
 #echo gcloud compute instances list
@@ -29,6 +29,6 @@ curl -k -u admin:CAdemo123! -H "Content-Type: application/xml" -X POST -d @lac-p
 sleep 5
 
 
-echo INFO: Calling the deployed gateway service to proxy to Live API Creator!
-curl -k -u admin:CAdemo123! https://192.168.99.100:31843/lac-policy
+#echo INFO: Calling the deployed gateway service to proxy to Live API Creator!
+#curl -k -u admin:CAdemo123! https://192.168.99.100:31843/lac-policy
 
